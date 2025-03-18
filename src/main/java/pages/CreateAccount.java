@@ -1,4 +1,4 @@
-package main;
+package pages;
 
 public class CreateAccount {
     public static void main() {

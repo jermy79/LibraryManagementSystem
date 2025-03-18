@@ -1,4 +1,4 @@
-package main;
+package pages;
 
 public class AdminSignIn {
     public static void main() {

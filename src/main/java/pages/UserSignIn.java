@@ -1,4 +1,4 @@
-package main;
+package pages;
 
 public class UserSignIn {
     public static void main() {
