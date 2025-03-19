@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b545db6c-1605-4c43-a4a1-997cdc5e909b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/utilities/JavaGetRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Book.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/objects/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/objects/Book.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utilities/GetBook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utilities/GetBook.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +49,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.GetBook.executor": "Run",
     "Application.JavaGetRequest.executor": "Run",
     "Application.Main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -119,7 +118,7 @@
       <option name="presentableId" value="Default" />
       <updated>1742251597654</updated>
       <workItem from="1742251598696" duration="11510000" />
-      <workItem from="1742344855588" duration="6718000" />
+      <workItem from="1742344855588" duration="7242000" />
     </task>
     <servers />
   </component>

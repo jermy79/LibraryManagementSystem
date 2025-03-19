@@ -44,7 +44,7 @@ public class GetBook {
                     author = String.join(", ", authorsArray.toList().stream().map(Object::toString).toArray(String[]::new));
                 }
 
-                return new Book(title, author, publisher);
+                return new Book(title, author, publisher,isbn);
             }
         } catch (Exception e) {
             System.err.println("Error fetching book details: " + e.getMessage());
