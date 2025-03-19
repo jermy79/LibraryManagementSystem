@@ -9,8 +9,8 @@ public class Main {
         Scanner userInput = new Scanner(System.in);
         System.out.println("Welcome to the Library Management System" +
                 "\n Please Select an Option:" +
-                "\n1: User Sign In" +
-                "\n2: Admin Sign In" +
+                "\n1: objects.User Sign In" +
+                "\n2: objects.Admin Sign In" +
                 "\n3: Create Account" +
                 "\n4: Exit");
 
