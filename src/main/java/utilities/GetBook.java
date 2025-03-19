@@ -51,15 +51,4 @@ public class GetBook {
         }
         return null;
     }
-
-    public static void main(String[] args) {
-        String isbn = "9780134685991"; // Example ISBN
-        Book book = getBookByISBN(isbn);
-
-        if (book != null) {
-            System.out.println(book);
-        } else {
-            System.out.println("objects.Book not found for ISBN: " + isbn);
-        }
-    }
 }
