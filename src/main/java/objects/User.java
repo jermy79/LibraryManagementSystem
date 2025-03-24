@@ -1,11 +1,12 @@
 package objects;
 
+import java.util.List;
 import org.mindrot.jbcrypt.BCrypt;
 
 public class User {
     private String userName;
     private String passwordHash;
-    private Book[] books;
+    private List books;
 
     public User(String userName, String password) {
         this.userName = userName;

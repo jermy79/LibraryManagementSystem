@@ -61,7 +61,8 @@ public class BookDB {
                         rs.getString("title"),
                         rs.getString("author"),
                         rs.getString("publisher"),
-                        rs.getString("isbn")
+                        rs.getString("isbn"),
+                        rs.getBoolean("checkedOut")
                 );
             }
         } catch (SQLException e) {
@@ -85,7 +86,8 @@ public class BookDB {
                         rs.getString("title"),
                         rs.getString("author"),
                         rs.getString("publisher"),
-                        rs.getString("isbn")
+                        rs.getString("isbn"),
+                        rs.getBoolean("checkedOut")
                 ));
             }
         } catch (SQLException e) {
@@ -109,7 +111,8 @@ public class BookDB {
                         rs.getString("title"),
                         rs.getString("author"),
                         rs.getString("publisher"),
-                        rs.getString("isbn")
+                        rs.getString("isbn"),
+                        rs.getBoolean("checkedOut")
                 ));
             }
         } catch (SQLException e) {
@@ -133,7 +136,8 @@ public class BookDB {
                         rs.getString("title"),
                         rs.getString("author"),
                         rs.getString("publisher"),
-                        rs.getString("isbn")
+                        rs.getString("isbn"),
+                        rs.getBoolean("checkedOut")
                 ));
             }
         } catch (SQLException e) {
@@ -157,7 +161,8 @@ public class BookDB {
                         rs.getString("title"),
                         rs.getString("author"),
                         rs.getString("publisher"),
-                        rs.getString("isbn")
+                        rs.getString("isbn"),
+                        rs.getBoolean("checkedOut")
                 ));
             }
         } catch (SQLException e) {
@@ -165,4 +170,32 @@ public class BookDB {
         }
         return books;
     }
+
+    // Get all books from the database
+    public static List<Book> getAllBooks() {
+        List<Book> books = new ArrayList<>();
+        String query = "SELECT * FROM books";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                books.add(new Book(
+                        rs.getInt("bookID"),
+                        rs.getString("title"),
+                        rs.getString("author"),
+                        rs.getString("publisher"),
+                        rs.getString("isbn"),
+                        rs.getBoolean("checkedOut")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return books;
+    }
+
 }
+
+

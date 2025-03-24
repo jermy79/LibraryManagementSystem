@@ -17,12 +17,13 @@ public class Book {
         this.isbn = isbn;
     }
 
-    public Book(int bookID,String title, String author, String publisher, String isbn) {
+    public Book(int bookID,String title, String author, String publisher, String isbn, boolean checkedOut) {
         this.title = title;
         this.author = author;
         this.publisher = publisher;
         this.isbn = isbn;
         this.bookID = bookID;
+        this.checkedOut = checkedOut;
     }
 
     public String getTitle() {
@@ -48,6 +49,6 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book ID: " + bookID + "\nISBN: " + isbn + "\nTitle: " + title + "\nAuthor: " + author + "\nPublisher: " + publisher;
+        return "Book ID: " + bookID + "\nISBN: " + isbn + "\nTitle: " + title + "\nAuthor: " + author + "\nPublisher: " + publisher + "\nChecked Out?: " + checkedOut;
     }
 }
