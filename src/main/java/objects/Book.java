@@ -26,6 +26,14 @@ public class Book {
         this.checkedOut = checkedOut;
     }
 
+    public Book(int bookID,String title, String author, String publisher, String isbn) {
+        this.title = title;
+        this.author = author;
+        this.publisher = publisher;
+        this.isbn = isbn;
+        this.bookID = bookID;
+    }
+
     public String getTitle() {
         return title;
     }

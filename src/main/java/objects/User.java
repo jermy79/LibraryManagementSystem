@@ -1,32 +1,48 @@
 package objects;
 
 import java.util.List;
-import org.mindrot.jbcrypt.BCrypt;
+import java.util.stream.Collectors;
 
 public class User {
     private String userName;
-    private String passwordHash;
-    private List books;
+    private final String passwordHash;
+    private List <Book> books;
+    int userID;
 
-    public User(String userName, String password) {
+
+    public User(String userName, String passwordHash) {
         this.userName = userName;
-        this.passwordHash = this.hashPassword(password);
+        this.passwordHash = passwordHash;
     }
 
-    private String hashPassword(String password) {
-        return BCrypt.hashpw(password, BCrypt.gensalt());
+    public User(int userID,String userName, String passwordHash, List<Book> books) {
+        this.userName = userName;
+        this.passwordHash = passwordHash;
+        this.books = books;
+        this.userID = userID;
     }
 
     public String getUserName() {
         return userName;
     }
 
-    public boolean checkPassword(String password) {
-        return BCrypt.checkpw(password, this.passwordHash);
+    public List <Book> getBooks() {
+        return books;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    @Override
+    public String toString() {
+        String booksString = (books == null || books.isEmpty())
+                ? "No books checked out"
+                : books.stream()
+                .map(Book::getTitle)
+                .collect(Collectors.joining(", "));
+
+        return "{" +
+                "userID=" + userID +
+                ", userName='" + userName + '\'' +
+                ", books=" + booksString +
+                '}';
     }
 
 }
