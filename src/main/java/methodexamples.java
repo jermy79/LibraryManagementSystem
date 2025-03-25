@@ -1,6 +1,11 @@
+import com.mysql.cj.Session;
 import db_api.BookDB;
+import db_api.UserDB;
 import utilities.GetBook;
 import objects.Book;
+import utilities.SessionManager;
+import objects.User;
+
 import java.util.List;
 
 
@@ -41,6 +46,37 @@ public class methodexamples {
 
         //You can also remove a book with the function deleteBook(int bookID)
 
+
+        //To create a user you can import db_api.BookDB and use registerUser(String username, String password)
+
+//        UserDB.registerUser("test3","password");
+
+        //To log in just use loginUser(String username, String password)
+
+        UserDB.loginUser("test","password");
+
+        //Now the currently logged in user will be stored in SessionManager
+        // which can be imported from utilities.SessionManager
+        //the function will return a User object
+        User loggedin = SessionManager.getCurrentUser();
+        System.out.println(loggedin);
+
+        //User objects have many functions such as returning the list of books they have checked out
+        System.out.println(loggedin.getBooks());
+
+        //You can also checkoutBooks to a user, doesn't have to be logged in
+        //title doesn't have to be exact match
+
+        loggedin.checkoutBook("Hobbit");
+        System.out.println(loggedin.getBooks());
+        //You can also return books, again user doesn't have to be logged in
+        //the title must be an exact match
+
+        loggedin.returnBook("The Hobbit, Or, There and Back Again");
+        System.out.println(loggedin.getBooks());
+
+        //after you're done you can log out the current user
+        SessionManager.logoutUser();
 
     }
 }

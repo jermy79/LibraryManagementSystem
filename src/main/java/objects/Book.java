@@ -6,8 +6,8 @@ public class Book {
     private String publisher;
     private String isbn;
     private int bookID = -1;
-    private int checkoutDate;
-    private int dueDate;
+    private String checkoutDate;
+    private String dueDate;
     private boolean checkedOut;
 
     public Book(String title, String author, String publisher, String isbn) {
@@ -24,14 +24,18 @@ public class Book {
         this.isbn = isbn;
         this.bookID = bookID;
         this.checkedOut = checkedOut;
+        this.checkoutDate = checkoutDate;
+        this.dueDate = dueDate;
     }
-
-    public Book(int bookID,String title, String author, String publisher, String isbn) {
+    public Book(int bookID,String title, String author, String publisher, String isbn, boolean checkedOut,String checkoutDate,String dueDate) {
         this.title = title;
         this.author = author;
         this.publisher = publisher;
         this.isbn = isbn;
         this.bookID = bookID;
+        this.checkedOut = checkedOut;
+        this.checkoutDate = checkoutDate;
+        this.dueDate = dueDate;
     }
 
     public String getTitle() {
@@ -54,6 +58,17 @@ public class Book {
         return bookID;
     }
 
+    public String getCheckoutDate() {
+        return checkoutDate;
+    }
+
+    public String getDueDate() {
+        return dueDate;
+    }
+
+    public boolean isCheckedOut() {
+        return checkedOut;
+    }
 
     @Override
     public String toString() {

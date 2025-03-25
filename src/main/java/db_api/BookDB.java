@@ -196,6 +196,38 @@ public class BookDB {
         return books;
     }
 
+    public static List<Book> getAvailableBooksByTitle(String bookTitle) {
+        List<Book> books = new ArrayList<>();
+
+        // Use '%' for partial matching (wildcard search)
+        String sql = "SELECT bookID, title, author, publisher, isbn, checkedOut " +
+                "FROM books WHERE title LIKE ? AND checkedOut = false";  // only fetch books that are not checked out
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            // Use '%' to allow partial matching of the title
+            stmt.setString(1, "%" + bookTitle + "%");  // This allows partial matching (e.g., search for "Java")
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                books.add(new Book(
+                        rs.getInt("bookID"),
+                        rs.getString("title"),
+                        rs.getString("author"),
+                        rs.getString("publisher"),
+                        rs.getString("isbn"),
+                        rs.getBoolean("checkedOut")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return books;  // Will return an empty list if no books found
+    }
+
 }
 
 

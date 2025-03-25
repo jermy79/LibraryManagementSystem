@@ -10,12 +10,13 @@ import java.util.List;
 
 public class test {
     public static void main(String[] args) {
-        User test = UserDB.getUserByUsername("test2");
 
         UserDB.loginUser("test","password");
 
-        SessionManager.getCurrentUser().getBooks();
-        System.out.println(SessionManager.getCurrentUser().getBooks());
+        User loggedin = SessionManager.getCurrentUser();
+
+
+
 
 
     }

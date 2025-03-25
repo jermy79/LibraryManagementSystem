@@ -7,8 +7,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.format.DateTimeFormatter;
 
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -92,7 +94,7 @@ public class UserDB {
     }
 
     // Retrieve the books associated with the user
-    private static List<Book> getUserBooks(int userID) {
+    public static List<Book> getUserBooks(int userID) {
         List<Book> books = new ArrayList<>();
         String sql = "SELECT b.bookID, b.title, b.author, b.publisher, b.isbn, b.checkedOut " + // Ensure `checkedOut` is selected here
                 "FROM books b " +
@@ -131,7 +133,7 @@ public class UserDB {
 
     public static User getUserByUsername(String username) {
         String userQuery = "SELECT userID, username, passwordHash FROM users WHERE username = ?";
-        String booksQuery = "SELECT b.bookID, b.title, b.author, b.publisher, b.isbn " +
+        String booksQuery = "SELECT b.bookID, b.title, b.author, b.publisher, b.isbn, b.checkedOut " +
                 "FROM books b " +
                 "JOIN user_books ub ON b.bookID = ub.bookID " +
                 "JOIN users u ON ub.userID = u.userID " +
@@ -140,19 +142,22 @@ public class UserDB {
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement userStmt = conn.prepareStatement(userQuery)) {
 
+            // Set the username to search for
             userStmt.setString(1, username);
             ResultSet userRs = userStmt.executeQuery();
 
             if (userRs.next()) {
+                // Get user details from the result set
                 int userID = userRs.getInt("userID");
                 String passwordHash = userRs.getString("passwordHash");
 
-                // Fetch books for the user
+                // Create list of books for this user
                 List<Book> books = new ArrayList<>();
                 try (PreparedStatement booksStmt = conn.prepareStatement(booksQuery)) {
-                    booksStmt.setString(1, username);
+                    booksStmt.setString(1, username);  // Set the username to fetch the books
                     ResultSet booksRs = booksStmt.executeQuery();
 
+                    // Fetch books associated with the user
                     while (booksRs.next()) {
                         books.add(new Book(
                                 booksRs.getInt("bookID"),
@@ -160,16 +165,103 @@ public class UserDB {
                                 booksRs.getString("author"),
                                 booksRs.getString("publisher"),
                                 booksRs.getString("isbn"),
-                                booksRs.getBoolean("checkedOut")
+                                booksRs.getBoolean("checkedOut")  // Assume this column exists
                         ));
                     }
+                } catch (SQLException e) {
+                    System.err.println("Error fetching books for the user: " + e.getMessage());
+                    e.printStackTrace();
                 }
 
+                // Return the user along with their books
                 return new User(userID, username, passwordHash, books);
             }
         } catch (SQLException e) {
+            System.err.println("Error fetching user data: " + e.getMessage());
             e.printStackTrace();
         }
         return null; // Return null if user is not found
     }
+
+    public static boolean checkoutBook(int userID, int bookID) {
+        // Define the SQL query to check if the user already has the book checked out
+        String checkBookQuery = "SELECT * FROM user_books WHERE userID = ? AND bookID = ?";
+
+        // Define the SQL query to update the book's `checkedOut` status
+        String updateBookQuery = "UPDATE books SET checkedOut = TRUE WHERE bookID = ?";
+
+        // Define the SQL query to insert the relationship into `user_books`
+        String insertUserBookQuery = "INSERT INTO user_books (userID, bookID, checkoutDate, dueDate) VALUES (?, ?, ?, ?)";
+
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            // Check if the user already has the book checked out
+            PreparedStatement checkStmt = conn.prepareStatement(checkBookQuery);
+            checkStmt.setInt(1, userID);
+            checkStmt.setInt(2, bookID);
+            var rs = checkStmt.executeQuery();
+
+            if (rs.next()) {
+                System.out.println("This book is already checked out by the user.");
+                return false;
+            }
+
+            // Update the book's `checkedOut` status to TRUE
+            PreparedStatement updateStmt = conn.prepareStatement(updateBookQuery);
+            updateStmt.setInt(1, bookID);
+            updateStmt.executeUpdate();
+
+            // Set the checkout date and due date (14 days from now)
+            LocalDate currentDate = LocalDate.now();
+            LocalDate dueDate = currentDate.plusDays(14);  // Set the due date to 14 days from now
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            String formattedDueDate = dueDate.format(formatter);
+
+            // Insert the relationship into the `user_books` table
+            PreparedStatement insertStmt = conn.prepareStatement(insertUserBookQuery);
+            insertStmt.setInt(1, userID);
+            insertStmt.setInt(2, bookID);
+            insertStmt.setString(3, currentDate.toString());  // Checkout date
+            insertStmt.setString(4, formattedDueDate);       // Due date
+            insertStmt.executeUpdate();
+
+            System.out.println("Book checked out successfully. Due date is " + formattedDueDate);
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public static boolean returnBook(int bookID, int userID) {
+        // First, set the book's checkedOut status to false in the books table
+        String updateBookSql = "UPDATE books SET checkedOut = false WHERE bookID = ?";
+        String deleteUserBookSql = "DELETE FROM user_books WHERE bookID = ? AND userID = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            // Disable the book (mark it as returned)
+            try (PreparedStatement updateStmt = conn.prepareStatement(updateBookSql)) {
+                updateStmt.setInt(1, bookID);
+                int rowsUpdated = updateStmt.executeUpdate();
+                if (rowsUpdated == 0) {
+                    System.out.println("Failed to mark book as returned (checkedOut = false).");
+                    return false;
+                }
+            }
+
+            // Remove the book from the user's checked out list
+            try (PreparedStatement deleteStmt = conn.prepareStatement(deleteUserBookSql)) {
+                deleteStmt.setInt(1, bookID);
+                deleteStmt.setInt(2, userID);
+
+                int rowsAffected = deleteStmt.executeUpdate();
+                return rowsAffected > 0; // Return true if the book was removed from user_books table
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
 }
