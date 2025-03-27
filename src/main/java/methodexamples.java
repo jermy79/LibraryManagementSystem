@@ -78,5 +78,22 @@ public class methodexamples {
         //after you're done you can log out the current user
         SessionManager.logoutUser();
 
+
+        //To make admin account use the following method and
+        //You have to use the key TGJRNqJuwzagKjaWt64pGtKlmlolerji to make the account
+
+        //UserDB.registerAdmin("admin","password0987123","TGJRNqJuwzagKjaWt64pGtKlmlolerji");
+
+        //To login admin use the admin login method
+
+        UserDB.loginAdmin("admin","password0987123");
+
+        //You can call the method isAdminLoggedIn() or isUserLoggedIn() to see which is logged in
+        System.out.println(SessionManager.isAdminLoggedIn());
+        System.out.println(SessionManager.isUserLoggedIn());
+
+        //Logging out admins is the same
+        UserDB.logoutUser();
+
     }
 }

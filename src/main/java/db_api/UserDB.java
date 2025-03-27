@@ -1,5 +1,6 @@
 package db_api;
 
+import objects.Admin;
 import objects.Book;
 import objects.User;
 import utilities.SessionManager;
@@ -32,6 +33,29 @@ public class UserDB {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static boolean registerAdmin(String username, String password, String key) {
+        if ("TGJRNqJuwzagKjaWt64pGtKlmlolerji".equals(key)) {
+            String sql = "INSERT INTO admin (username, passwordHash) VALUES (?, ?)";
+
+            try (Connection conn = DatabaseConnection.getConnection();
+                 PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+                String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+                stmt.setString(1, username);
+                stmt.setString(2, hashedPassword);
+
+                stmt.executeUpdate();
+                System.out.println("Admin registered successfully.");
+                return true;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Invalid key. Please contact an administrator.");
+        }
+        return false;
     }
 
     // Delete a user
@@ -76,6 +100,45 @@ public class UserDB {
 
                     // Create a User object with the retrieved books
                     User loggedInUser = new User(userID, userName, passwordHash, userBooks);
+
+                    // Store the user in the SessionManager
+                    SessionManager.setCurrentUser(loggedInUser);
+                    System.out.println("User logged in successfully.");
+                    return true;
+                } else {
+                    System.out.println("Invalid password.");
+                }
+            } else {
+                System.out.println("User not found.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean loginAdmin(String username, String password) {
+        String sql = "SELECT * FROM admin WHERE username = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, username);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                String storedHash = rs.getString("passwordHash");
+                if (BCrypt.checkpw(password, storedHash)) {
+                    // If password matches, create a User object
+                    int userID = rs.getInt("adminID");
+                    String userName = rs.getString("username");
+                    String passwordHash = rs.getString("passwordHash");
+
+                    // Retrieve the user's books
+                    List<Book> userBooks = getUserBooks(userID);
+
+                    // Create a User object with the retrieved books
+                    Admin loggedInUser = new Admin(userID, userName, passwordHash, userBooks);
 
                     // Store the user in the SessionManager
                     SessionManager.setCurrentUser(loggedInUser);

@@ -1,5 +1,6 @@
 import db_api.BookDB;
 import db_api.UserDB;
+import objects.Admin;
 import objects.User;
 import utilities.GetBook;
 import objects.Book;
@@ -10,13 +11,6 @@ import java.util.List;
 
 public class test {
     public static void main(String[] args) {
-
-        UserDB.loginUser("test","password");
-
-        User loggedin = SessionManager.getCurrentUser();
-
-
-
 
 
     }
