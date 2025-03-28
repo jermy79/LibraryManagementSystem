@@ -40,6 +40,8 @@ public class Main {
             case 4:
                 CreateAdminAccount.main(userInput);
                 break;
+            case 5:
+                break;
             default:
                 System.out.println("error");
                 break;
