@@ -2,13 +2,14 @@ package pages;
 
 import db_api.UserDB;
 import objects.User;
+
 import java.util.Scanner;
 
 public class CreateAccount
 {
-    public static void main()
+
+    public static void main(Scanner scan)
     {
-        Scanner scan = new Scanner(System.in);
 
         System.out.println("-----Create Account-----");
 
@@ -22,8 +23,6 @@ public class CreateAccount
         UserDB.registerUser(userName, password);
 
         System.out.println("Account created successfully");
-
-        scan.close();
     }
 
 
@@ -31,13 +30,13 @@ public class CreateAccount
     {
         while(true)
         {
-            System.out.println("Enter username (4-12 Character): ");
+            System.out.println("Enter username ( 4 or more characters ): ");
             String userName = scan.nextLine().trim();
 
-            //Check if username is between 4-12 character
-            if(userName.length() < 4 || userName.length() > 12)
+            //Check if username is more than 3 characters long
+            if(userName.length() <= 3 )
             {
-                System.out.println("Username must be between 4 and 12 characters");
+                System.out.println("Username must be greater than 3 characters");
                 continue;
             }
 
@@ -60,7 +59,7 @@ public class CreateAccount
         while(true)
         {
             //Makes sure user inputs a valid password with number and special character for security
-            System.out.println("Enter password (8-16 Character, at least 1 number( 0-9 )\n" +
+            System.out.println("Enter password (8-16 Characters, at least 1 number( 0-9 )\n" +
                     "and 1 special character ( @#$%^&*_+ ): ");
             String password = scan.nextLine().trim();
 

@@ -6,6 +6,7 @@ import java.util.Scanner;
 import objects.Book;
 import pages.AdminSignIn;
 import pages.CreateAccount;
+import pages.CreateAdminAccount;
 import pages.UserSignIn;
 import db_api.BookDB;
 import utilities.GetBook;
@@ -16,14 +17,15 @@ public class Main {
         Scanner userInput = new Scanner(System.in);
         System.out.println("Welcome to the Library Management System" +
                 "\n Please Select an Option:" +
-                "\n1: objects.User Sign In" +
-                "\n2: objects.Admin Sign In" +
+                "\n1: User Sign In" +
+                "\n2: Admin Sign In" +
                 "\n3: Create Account" +
-                "\n4: Exit");
+                "\n4: Create Admin Account" +
+                "\n5: Exit");
 
         System.out.print("Enter option: ");
-
-        int option = userInput.nextInt();
+        String optionInput = userInput.nextLine();
+        int option = Integer.parseInt(optionInput);
 
         switch (option) {
             case 1:
@@ -33,12 +35,15 @@ public class Main {
                 AdminSignIn.main();
                 break;
             case 3:
-                CreateAccount.main();
+                CreateAccount.main(userInput);
                 break;
             case 4:
+                CreateAdminAccount.main(userInput);
                 break;
             default:
                 System.out.println("error");
+                break;
         }
+        userInput.close();
     }
 }
