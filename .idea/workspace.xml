@@ -5,7 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b545db6c-1605-4c43-a4a1-997cdc5e909b" name="Changes" comment="added functions for User so you can login and logout and create users. Can retrive info about users">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/db_api/BookDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/db_api/BookDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/db_api/UserDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/db_api/UserDB.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pages/UserSignIn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/UserSignIn.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -116,10 +120,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Application.test" />
-        <item itemvalue="Application.methodexamples" />
         <item itemvalue="Application.GetBook" />
+        <item itemvalue="Application.test" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.methodexamples" />
       </list>
     </recent_temporary>
   </component>
@@ -227,6 +231,11 @@
           <properties class="java.sql.SQLException" package="java.sql" />
           <option name="timeStamp" value="2" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/pages/AdminSignIn.java</url>
+          <line>4</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

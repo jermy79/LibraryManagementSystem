@@ -103,7 +103,7 @@ public class UserDB {
 
                     // Store the user in the SessionManager
                     SessionManager.setCurrentUser(loggedInUser);
-                    System.out.println("User logged in successfully.");
+                    System.out.println("User logged in successfully: ");
                     return true;
                 } else {
                     System.out.println("Invalid password.");
