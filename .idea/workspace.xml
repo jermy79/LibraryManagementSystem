@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b545db6c-1605-4c43-a4a1-997cdc5e909b" name="Changes" comment="added functions for User so you can login and logout and create users. Can retrive info about users">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="b545db6c-1605-4c43-a4a1-997cdc5e909b" name="Changes" comment="added an option to log out, a menu loop, and viewCheckedOutBookd">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/db_api/BookDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/db_api/BookDB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db_api/UserDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/db_api/UserDB.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pages/UserSignIn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/UserSignIn.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -37,7 +34,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/jermy79/LibraryManagementSystem.git&quot;,
-    &quot;accountId&quot;: &quot;6f75abe9-432f-4037-b660-052688c5e1e9&quot;
+    &quot;accountId&quot;: &quot;95ef7d94-1502-449d-8efc-512843bf1519&quot;
   }
 }</component>
   <component name="ProblemsViewState">
@@ -120,9 +117,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="Application.GetBook" />
         <item itemvalue="Application.test" />
-        <item itemvalue="Application.Main" />
         <item itemvalue="Application.methodexamples" />
       </list>
     </recent_temporary>
@@ -150,6 +147,8 @@
       <workItem from="1742845713688" duration="26557000" />
       <workItem from="1743752451036" duration="503000" />
       <workItem from="1743970393087" duration="4614000" />
+      <workItem from="1744226240461" duration="3560000" />
+      <workItem from="1744307088044" duration="2278000" />
     </task>
     <task id="LOCAL-00001" summary="Added functions to interact with book database aswell as a class with examples of how to use them">
       <option name="closed" value="true" />
@@ -199,7 +198,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743975072541</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="added an option to log out, a menu loop, and viewCheckedOutBookd">
+      <option name="closed" value="true" />
+      <created>1744194342517</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1744194342518</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -222,7 +229,8 @@
     <MESSAGE value="Changed Book class and BookDB to inclue whether a book is checked out or not." />
     <MESSAGE value="added functions to return books and checkout books" />
     <MESSAGE value="added functions for User so you can login and logout and create users. Can retrive info about users" />
-    <option name="LAST_COMMIT_MESSAGE" value="added functions for User so you can login and logout and create users. Can retrive info about users" />
+    <MESSAGE value="added an option to log out, a menu loop, and viewCheckedOutBookd" />
+    <option name="LAST_COMMIT_MESSAGE" value="added an option to log out, a menu loop, and viewCheckedOutBookd" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

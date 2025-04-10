@@ -33,7 +33,7 @@ public class UserSignIn {
                     break;
                 case 2:
                     System.out.println("Checkout Books");
-                    checkoutBooks(scan);
+                    checkoutBooks();
                     break;
                 case 3:
                     System.out.println("View Books Available");
@@ -101,9 +101,32 @@ public class UserSignIn {
         }
     }
 
-    public static void checkoutBooks(Scanner scan) {
+    public static void checkoutBooks() {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("-----Checkout Books-----");
+        System.out.println("Enter book ID to checkout: ");
 
+        while(!scan.hasNextInt()) {
+            System.out.println("Please enter a valid option: ");
+            scan.nextLine();
+        }
+        int bookID = scan.nextInt();
+        Book book = BookDB.getBookByID(bookID);
 
+        if(book == null){
+            System.out.println("Book not found");
+            return;
+        }
+        if(book.isCheckedOut()){
+            System.out.println("Book is currently checked out");
+            return;
+        }
+        boolean success = UserDB.checkoutBook(currentUser.getUserID(), bookID);
+
+        if (!success) {
+            System.out.println("Book not available or checkout failed.");
+        }
+        System.out.println(book);
     }
 
     public static void viewBooks() // user ids able to view all books avalaible
@@ -179,7 +202,7 @@ public class UserSignIn {
         boolean success = currentUser.returnBook(bookToReturn.getTitle());
 
         if (success) {
-            System.out.println("Book Returned");
+            System.out.println("Book returned successfully");
         } else {
             System.out.println("Book could not be returned.");
         }

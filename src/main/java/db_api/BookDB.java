@@ -200,8 +200,7 @@ public class BookDB {
         List<Book> books = new ArrayList<>();
 
         // Use '%' for partial matching (wildcard search)
-        String sql = "SELECT bookID, title, author, publisher, isbn, checkedOut " +
-                "FROM books WHERE title LIKE ? AND checkedOut = false";  // only fetch books that are not checked out
+        String sql = "SELECT * FROM books WHERE title LIKE '%Dune'";  // only fetch books that are not checked out
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -221,6 +220,7 @@ public class BookDB {
                         rs.getBoolean("checkedOut")
                 ));
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
