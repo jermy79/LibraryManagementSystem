@@ -41,6 +41,9 @@ public class AdminSignIn {
                 case 6:
                     System.out.println("Logging out...");
                     break;
+                case 7:
+                    System.out.println("Remove users");
+                    removeUsers();
                 default:
                     System.out.println("Please enter a valid option: ");
             }
@@ -88,6 +91,9 @@ public class AdminSignIn {
 
     }
     public static void returnUserBooks(Scanner scan){
+
+    }
+    public static void removeUsers(){
 
     }
     }
