@@ -54,7 +54,7 @@ public class AdminSignIn {
                 default:
                     System.out.println("Please enter a valid option: ");
             }
-        } while (choice != 6); //loops the menu
+        } while (choice != 7); //loops the menu
     }
         public static void signIn (Scanner scan)  // Here the user is able to sign in using their create duser name and password
         {
@@ -87,7 +87,30 @@ public class AdminSignIn {
         System.out.println("Enter your choice: ");
     }
     public static void viewUserInfo(){
+        // add a method to show a list of users to choose from
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter Username to view info: ");
+        String username = scan.nextLine();
 
+        User userToView = UserDB.getUserByUsername(username);
+
+        if(userToView != null) {
+            System.out.println("User information: ");
+            System.out.println("Username: " + userToView.getUserName());
+            System.out.println("User ID: " + userToView.getUserID());
+
+            List<Book> books = userToView.getBooks();
+            if(books.isEmpty()) {
+                System.out.println("Checked out books: none");
+            }else {
+                System.out.println("Checked out books: ");
+                for (Book book : books) {
+                    System.out.println(" - " + book.getTitle());
+                }
+            }
+        }else{
+            System.out.println("User not found");
+        }
     }
     public static void checkoutUserBooks(){
 
@@ -123,7 +146,7 @@ public class AdminSignIn {
             }
         }
     }
-    //fix this error
+
     public static void returnUserBooks(){
         Scanner scan = new Scanner(System.in);
         System.out.println("Enter Username to view info: ");
