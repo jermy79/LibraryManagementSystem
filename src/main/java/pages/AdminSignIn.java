@@ -100,7 +100,7 @@ public class AdminSignIn {
             Scanner scan = new Scanner(System.in);
             String input = scan.nextLine().trim();
 
-            //still need to create code to show user info here
+            //still need to create code to show userInfo
 
 
 
