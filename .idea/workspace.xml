@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b545db6c-1605-4c43-a4a1-997cdc5e909b" name="Changes" comment="added a remove function for admin">
+    <list default="true" id="b545db6c-1605-4c43-a4a1-997cdc5e909b" name="Changes" comment="returnBooks, SearchBooks, and viewBooks are done">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db_api/UserDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/db_api/UserDB.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pages/AdminSignIn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/AdminSignIn.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -151,7 +150,8 @@
       <workItem from="1744307088044" duration="2278000" />
       <workItem from="1744616742417" duration="3253000" />
       <workItem from="1744676728036" duration="2712000" />
-      <workItem from="1744732682991" duration="1995000" />
+      <workItem from="1744732682991" duration="2410000" />
+      <workItem from="1744737473713" duration="335000" />
     </task>
     <task id="LOCAL-00001" summary="Added functions to interact with book database aswell as a class with examples of how to use them">
       <option name="closed" value="true" />
@@ -225,7 +225,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744319192250</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="returnBooks, SearchBooks, and viewBooks are done">
+      <option name="closed" value="true" />
+      <created>1744734890698</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1744734890698</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -250,7 +258,8 @@
     <MESSAGE value="added functions for User so you can login and logout and create users. Can retrive info about users" />
     <MESSAGE value="added an option to log out, a menu loop, and viewCheckedOutBookd" />
     <MESSAGE value="added a remove function for admin" />
-    <option name="LAST_COMMIT_MESSAGE" value="added a remove function for admin" />
+    <MESSAGE value="returnBooks, SearchBooks, and viewBooks are done" />
+    <option name="LAST_COMMIT_MESSAGE" value="returnBooks, SearchBooks, and viewBooks are done" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -89,44 +89,29 @@ public class AdminSignIn {
     }
 
     public static void viewUserInfo(){
-        //create list of users
-        List<String> usernames = UserDB.getAllUsernames();
+        // add a method to show a list of users to choose from
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter Username to view info: ");
+        String username = scan.nextLine();
 
-        //print all users
-        if (usernames.isEmpty()) {
-            System.out.println("No users found in the system.");
-        } else {
-            System.out.println("----- Registered Users -----");
-            for (int i = 0; i < usernames.size(); i++) {
-                System.out.println((i + 1) + ". " + usernames.get(i));
-            }
+        User userToView = UserDB.getUserByUsername(username);
 
-            System.out.println("\nEnter a username to search or press Enter to go back:");
-            Scanner scan = new Scanner(System.in);
-            String input = scan.nextLine().trim();
+        if(userToView != null) {
+            System.out.println("User information: ");
+            System.out.println("Username: " + userToView.getUserName());
+            System.out.println("User ID: " + userToView.getUserID());
 
-            if (!input.isEmpty()) {
-                boolean found = false;
-                for (String username : usernames) {
-                    if (username.equalsIgnoreCase(input)) {
-                        System.out.println("User \"" + username + "\" found in the database.");
-                        // Get full user info
-                        User user = UserDB.getUserByUsername(username);
-                        if (user != null) {
-                            System.out.println(user); // uses User.toString()
-                        } else {
-                            System.out.println("User details could not be retrieved.");
-                        }
-                        found = true;
-                        break;
-                    }
+            List<Book> books = userToView.getBooks();
+            if(books.isEmpty()) {
+                System.out.println("Checked out books: none");
+            }else {
+                System.out.println("Checked out books: ");
+                for (Book book : books) {
+                    System.out.println(" - " + book.getTitle());
                 }
-                if (!found) {
-                    System.out.println("No user with the name \"" + input + "\" was found.");
-                }
-                System.out.println("Press Enter to go back...");
-                scan.nextLine();
             }
+        }else{
+            System.out.println("User not found");
         }
     }
 
