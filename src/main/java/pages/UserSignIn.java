@@ -92,6 +92,7 @@ public class UserSignIn {
         if (checkedOut==null || checkedOut.isEmpty()) {
             System.out.println("You have no books checked out.");
         } else {
+            System.out.println("-----Your Books-----");
             System.out.println("Your checked out books are:");
             for (Book book : checkedOut) {
                 System.out.println(book);

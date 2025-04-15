@@ -326,5 +326,20 @@ public class UserDB {
         }
     }
 
+    public static List<String> getAllUsernames() {
+        List<String> usernames = new ArrayList<>();
+        String query = "SELECT username FROM users";
 
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                usernames.add(rs.getString("username"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return usernames;
+    }
 }
