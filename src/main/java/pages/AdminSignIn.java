@@ -89,8 +89,21 @@ public class AdminSignIn {
     }
 
     public static void viewUserInfo(){
-        // add a method to show a list of users to choose from
+
         Scanner scan = new Scanner(System.in);
+        // add a method to show a list of users to choose from
+        //create list of all users
+        List<String> usernames = UserDB.getAllUsernames();
+        if (usernames.isEmpty()) {
+            System.out.println("No users to remove.");
+            return;
+        }
+
+        System.out.println("----- Registered Users -----");
+        for (int i = 0; i < usernames.size(); i++) {
+            System.out.println((i + 1) + ". " + usernames.get(i));
+        }
+
         System.out.println("Enter Username to view info: ");
         String username = scan.nextLine();
 
@@ -247,6 +260,7 @@ public class AdminSignIn {
     public static void removeUsers() {
         Scanner scan = new Scanner(System.in);
 
+        //create list of all users
         List<String> usernames = UserDB.getAllUsernames();
         if (usernames.isEmpty()) {
             System.out.println("No users to remove.");
