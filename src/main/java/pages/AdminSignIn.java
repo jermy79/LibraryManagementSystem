@@ -1,6 +1,13 @@
 package pages;
 
+import db_api.BookDB;
 import db_api.UserDB;
+import objects.Book;
+import objects.User;
+
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import java.util.Scanner;
 
@@ -28,7 +35,7 @@ public class AdminSignIn {
                     break;
                 case 3:
                     System.out.println("View books available");
-                    viewUserBooks();
+                    viewBooks();
                     break;
                 case 4:
                     System.out.println("Search books");
@@ -36,14 +43,14 @@ public class AdminSignIn {
                     break;
                 case 5:
                     System.out.println("Return books for user");
-                    returnUserBooks(scan);
+                    returnUserBooks();
                     break;
                 case 6:
-                    System.out.println("Logging out...");
-                    break;
-                case 7:
                     System.out.println("Remove users");
                     removeUsers();
+                case 7:
+                    System.out.println("Logging out...");
+                    break;
                 default:
                     System.out.println("Please enter a valid option: ");
             }
@@ -75,7 +82,8 @@ public class AdminSignIn {
         System.out.println("3. View books available");
         System.out.println("4. Search books");
         System.out.println("5. Return books for user");
-        System.out.println("6. Logout");
+        System.out.println("6. Remove users");
+        System.out.println("7. Logout");
         System.out.println("Enter your choice: ");
     }
     public static void viewUserInfo(){
@@ -84,14 +92,85 @@ public class AdminSignIn {
     public static void checkoutUserBooks(){
 
     }
-    public static void viewUserBooks(){
+    public static void viewBooks(){
+        {
+            List<Book> viewBooks = BookDB.getAllBooks();
 
+            if (viewBooks.isEmpty()) {
+                System.out.println("No Books Found!");
+            } else {
+                System.out.println("Here are the Books Available");
+                for (Book book : viewBooks) {
+                    System.out.println("-------------");
+                    System.out.println(book);
+                }
+            }
+        }
     }
     public static void searchBooks(Scanner scan){
+        scan.nextLine();
+        System.out.println("Please Enter A Book Title: ");
+        String bookTitle = scan.nextLine().trim();
 
+        List<Book> foundBooks = BookDB.searchByTitle(bookTitle); // scanning the list of books in the arrray list
+
+        if (foundBooks.isEmpty()) {
+            System.out.println("Book with Title " + bookTitle + " is not found!");
+        } else {
+            System.out.println("Book Found!");
+            for (Book book : foundBooks) {
+                System.out.println(book);
+            }
+        }
     }
-    public static void returnUserBooks(Scanner scan){
+    //fix this error
+    public static void returnUserBooks(){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter Username to view info: ");
 
+        String username = scan.nextLine();
+        User userToView = UserDB.getUserByUsername(username);
+
+        List<Book> checkedOut = userToView.getBooks();
+
+        if (checkedOut.isEmpty()) {
+            System.out.println("You have no books checked out.");
+            return;
+        }
+
+        System.out.println("Your checked out books are:");
+        for (Book book : checkedOut) {
+            System.out.println("----------------");
+            System.out.println(book);
+        }
+
+        System.out.println("Enter ID of the book to return: ");
+        while (!scan.hasNextInt()) {
+            System.out.println("Please enter a valid ID: ");
+            scan.nextLine();
+        }
+        int bookID = scan.nextInt();
+        // Find the book with the entered ID
+        Book bookToReturn = null;
+        for (Book book : checkedOut) {
+            if (book.getBookID() == bookID) {
+                bookToReturn = book;
+                break;
+            }
+        }
+
+        if (bookToReturn == null) {
+            System.out.println("Invalid book ID. Book not found in your checked out books.");
+            return;
+        }
+
+        boolean success = userToView.returnBook(bookToReturn.getTitle());
+
+        if (success) {
+            System.out.println("Book returned successfully");
+        } else {
+            System.out.println("Book could not be returned.");
+        }
     }
     public static void removeUsers(){
 
