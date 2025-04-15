@@ -324,6 +324,7 @@ public class UserDB {
             e.printStackTrace();
             return false;
         }
+
     }
 
     public static List<String> getAllUsernames() {
