@@ -1,5 +1,6 @@
 package pages;
 
+import db_api.BookDB;
 import db_api.UserDB;
 import objects.Book;
 import objects.User;
@@ -53,7 +54,7 @@ public class AdminSignIn {
                 default:
                     System.out.println("Please enter a valid option: ");
             }
-        } while (choice != 6); //loops the menu
+        } while (choice != 7); //loops the menu
     }
         public static void signIn (Scanner scan)  // Here the user is able to sign in using their create duser name and password
         {
@@ -73,6 +74,7 @@ public class AdminSignIn {
                 }
             }
         }
+
     public static void Menu() // menu
     {
         System.out.println("Menu");
@@ -85,8 +87,8 @@ public class AdminSignIn {
         System.out.println("7. Logout");
         System.out.println("Enter your choice: ");
     }
-    public static void viewUserInfo(){
 
+    public static void viewUserInfo(){
         //create list of users
         List<String> usernames = UserDB.getAllUsernames();
 
@@ -103,18 +105,76 @@ public class AdminSignIn {
             Scanner scan = new Scanner(System.in);
             String input = scan.nextLine().trim();
 
-            //still need to create code to show userInfo
-
-
-
-
-
-
+            if (!input.isEmpty()) {
+                boolean found = false;
+                for (String username : usernames) {
+                    if (username.equalsIgnoreCase(input)) {
+                        System.out.println("User \"" + username + "\" found in the database.");
+                        // Get full user info
+                        User user = UserDB.getUserByUsername(username);
+                        if (user != null) {
+                            System.out.println(user); // uses User.toString()
+                        } else {
+                            System.out.println("User details could not be retrieved.");
+                        }
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    System.out.println("No user with the name \"" + input + "\" was found.");
+                }
+                System.out.println("Press Enter to go back...");
+                scan.nextLine();
+            }
         }
     }
-    public static void checkoutUserBooks(){
 
+
+    public static void checkoutUserBooks() {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter a username to search or press Enter to go back:");
+        String input = scan.nextLine().trim();
+
+        if (input.isEmpty()) {
+            return;
+        }
+        User user = UserDB.getUserByUsername(input);
+        if (user == null) {
+            System.out.println("User not found.");
+            return;
+        }
+        // Show available books
+        List<Book> availableBooks = BookDB.getAllBooks();
+        if (availableBooks.isEmpty()) {
+            System.out.println("No books available for checkout.");
+            return;
+        }
+        System.out.println("----- Available Books -----");
+        for (Book book : availableBooks) {
+            System.out.println("ID: " + book.getBookID() + " | Title: " + book.getTitle());
+        }
+        System.out.println("\nEnter the Book ID to checkout or press Enter to cancel:");
+        String idInput = scan.nextLine().trim();
+        if (idInput.isEmpty()) {
+            return;
+        }
+        try {
+            int bookID = Integer.parseInt(idInput);
+            boolean success = UserDB.checkoutBook(user.getUserID(), bookID);
+
+            if (success) {
+                System.out.println("Book with ID " + bookID + " checked out for " + user.getUserName());
+            } else {
+                System.out.println("Failed to checkout book. It might already be checked out.");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid Book ID.");
+        }
+        System.out.println("Press Enter to return to the menu.");
+        scan.nextLine();
     }
+
     public static void viewBooks(){
         {
             List<Book> viewBooks = BookDB.getAllBooks();
@@ -130,6 +190,7 @@ public class AdminSignIn {
             }
         }
     }
+
     public static void searchBooks(Scanner scan){
         scan.nextLine();
         System.out.println("Please Enter A Book Title: ");
@@ -146,6 +207,7 @@ public class AdminSignIn {
             }
         }
     }
+
     //fix this error
     public static void returnUserBooks(){
         Scanner scan = new Scanner(System.in);
@@ -195,12 +257,45 @@ public class AdminSignIn {
             System.out.println("Book could not be returned.");
         }
     }
-    public static void removeUsers(){
 
 
+    public static void removeUsers() {
+        Scanner scan = new Scanner(System.in);
 
+        List<String> usernames = UserDB.getAllUsernames();
+        if (usernames.isEmpty()) {
+            System.out.println("No users to remove.");
+            return;
+        }
 
+        System.out.println("----- Registered Users -----");
+        for (int i = 0; i < usernames.size(); i++) {
+            System.out.println((i + 1) + ". " + usernames.get(i));
+        }
 
+        System.out.println("\nEnter the username to remove or press Enter to go back:");
+        String input = scan.nextLine().trim();
+
+        if (input.isEmpty()) {
+            return;
+        }
+
+        if (!usernames.contains(input)) {
+            System.out.println("User not found.");
+            return;
+        }
+
+        System.out.println("Are you sure you want to remove user \"" + input + "\"? (yes/no)");
+        String confirm = scan.nextLine().trim();
+
+        if (confirm.equalsIgnoreCase("yes")) {
+            UserDB.deleteUser(input);
+        } else {
+            System.out.println("User removal canceled.");
+        }
+
+        System.out.println("Press Enter to return to the menu.");
+        scan.nextLine();
     }
 
 }
