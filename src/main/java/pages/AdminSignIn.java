@@ -1,6 +1,5 @@
 package pages;
 
-import db_api.BookDB;
 import db_api.UserDB;
 import objects.Book;
 import objects.User;
@@ -58,7 +57,7 @@ public class AdminSignIn {
     }
         public static void signIn (Scanner scan)  // Here the user is able to sign in using their create duser name and password
         {
-            System.out.println("-----Sign In-----");
+            System.out.println("-----Admin Sign In-----");
 
             while (true) {
                 System.out.println("Enter Username: ");
@@ -88,6 +87,30 @@ public class AdminSignIn {
     }
     public static void viewUserInfo(){
 
+        //create list of users
+        List<String> usernames = UserDB.getAllUsernames();
+
+        //print all users
+        if (usernames.isEmpty()) {
+            System.out.println("No users found in the system.");
+        } else {
+            System.out.println("----- Registered Users -----");
+            for (int i = 0; i < usernames.size(); i++) {
+                System.out.println((i + 1) + ". " + usernames.get(i));
+            }
+
+            System.out.println("\nEnter a username to search or press Enter to go back:");
+            Scanner scan = new Scanner(System.in);
+            String input = scan.nextLine().trim();
+
+            //still need to create code to show userInfo
+
+
+
+
+
+
+        }
     }
     public static void checkoutUserBooks(){
 
@@ -174,5 +197,10 @@ public class AdminSignIn {
     }
     public static void removeUsers(){
 
+
+
+
+
     }
-    }
+
+}
