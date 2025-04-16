@@ -88,14 +88,14 @@ public class UserSignIn {
         System.out.println("Enter your choice: ");
     }
     public static void viewCheckedOutBooks() {
-        List<Book> checkedOut = currentUser.getBooks();
-        if (checkedOut==null || checkedOut.isEmpty()) {
+        List<Book> updatedBooks = UserDB.getUserBooks(currentUser.getUserID());
+        if (updatedBooks == null || updatedBooks.isEmpty()) {
             System.out.println("You have no books checked out.");
         } else {
             System.out.println("-----Your Books-----");
             System.out.println("Your checked out books are:");
-            for (Book book : checkedOut) {
-                System.out.println(book);
+            for (Book book : updatedBooks) {
+                System.out.println("- " + book.getTitle() +  "(Book ID: " + book.getBookID() + ")");
             }
         }
     }
@@ -104,27 +104,29 @@ public class UserSignIn {
         System.out.println("-----Checkout Books-----");
         System.out.println("Enter book ID to checkout: ");
 
-        while(!scan.hasNextInt()) {
+        while (!scan.hasNextInt()) {
             System.out.println("Please enter a valid option: ");
             scan.nextLine();
         }
         int bookID = scan.nextInt();
         Book book = BookDB.getBookByID(bookID);
 
-        if(book == null){
+        if (book == null) {
             System.out.println("Book not found");
             return;
         }
-        if(book.isCheckedOut()){
+        if (book.isCheckedOut()) {
             System.out.println("Book is currently checked out");
             return;
         }
+
         boolean success = UserDB.checkoutBook(currentUser.getUserID(), bookID);
 
-        if (!success) {
+        if (success) {
+            System.out.println(book);
+        } else {
             System.out.println("Book not available or checkout failed.");
         }
-        System.out.println(book);
     }
 
     public static void viewBooks() // user ids able to view all books avalaible
@@ -160,15 +162,15 @@ public static void searchBooks(Scanner scan) // Here the user is able to check i
     }
 }
 public static void returnBooks(Scanner scan) {
-    List<Book> checkedOut = currentUser.getBooks();
+    List<Book> updatedBooks = UserDB.getUserBooks(currentUser.getUserID());
 
-    if (checkedOut.isEmpty()) {
+    if (updatedBooks.isEmpty()) {
         System.out.println("You have no books checked out.");
         return;
     }
 
     System.out.println("Your checked out books are:");
-    for (Book book : checkedOut) {
+    for (Book book : updatedBooks) {
         System.out.println("----------------");
         System.out.println(book);
     }
@@ -182,7 +184,7 @@ public static void returnBooks(Scanner scan) {
     int bookID = scan.nextInt();
     // Find the book with the entered ID
     Book bookToReturn = null;
-    for (Book book : checkedOut) {
+    for (Book book : updatedBooks) {
         if (book.getBookID() == bookID) {
             bookToReturn = book;
             break;
