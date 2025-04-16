@@ -91,8 +91,7 @@ public class AdminSignIn {
     public static void viewUserInfo(){
 
         Scanner scan = new Scanner(System.in);
-        // add a method to show a list of users to choose from
-        //create list of all users
+
         List<String> usernames = UserDB.getAllUsernames();
         if (usernames.isEmpty()) {
             System.out.println("No users to remove.");
@@ -174,39 +173,14 @@ public class AdminSignIn {
     }
 
     public static void viewBooks(){
-        {
-            List<Book> viewBooks = BookDB.getAllBooks();
-
-            if (viewBooks.isEmpty()) {
-                System.out.println("No Books Found!");
-            } else {
-                System.out.println("Here are the Books Available");
-                for (Book book : viewBooks) {
-                    System.out.println("-------------");
-                    System.out.println(book);
-                }
-            }
-        }
+            UserSignIn.viewBooks();
     }
 
     public static void searchBooks(Scanner scan){
-        scan.nextLine();
-        System.out.println("Please Enter A Book Title: ");
-        String bookTitle = scan.nextLine().trim();
-
-        List<Book> foundBooks = BookDB.searchByTitle(bookTitle); // scanning the list of books in the arrray list
-
-        if (foundBooks.isEmpty()) {
-            System.out.println("Book with Title " + bookTitle + " is not found!");
-        } else {
-            System.out.println("Book Found!");
-            for (Book book : foundBooks) {
-                System.out.println(book);
-            }
-        }
+        UserSignIn.searchBooks(scan);
     }
 
-    //fix this error
+
     public static void returnUserBooks(){
         Scanner scan = new Scanner(System.in);
         System.out.println("Enter Username to view info: ");
