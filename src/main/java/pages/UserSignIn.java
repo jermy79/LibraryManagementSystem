@@ -28,23 +28,18 @@ public class UserSignIn {
             choice = scan.nextInt();
             switch (choice) {
                 case 1:
-                    System.out.println("View Books Checked Out");
                     viewCheckedOutBooks();
                     break;
                 case 2:
-                    System.out.println("Checkout Books");
-                    checkoutBooks();
+                    checkoutBooks(scan);
                     break;
                 case 3:
-                    System.out.println("View Books Available");
                     viewBooks(); // view books method called
                     break;
                 case 4:
-                    System.out.println("Search Books");
                     searchBooks(scan); // search books method called
                     break;
                 case 5:
-                    System.out.println("Return Books");
                     returnBooks(scan);
                     break;
                 case 6:
@@ -89,18 +84,17 @@ public class UserSignIn {
     }
     public static void viewCheckedOutBooks() {
         List<Book> updatedBooks = UserDB.getUserBooks(currentUser.getUserID());
-        if (updatedBooks == null || updatedBooks.isEmpty()) {
-            System.out.println("You have no books checked out.");
-        } else {
+        if (!updatedBooks.isEmpty()) {
             System.out.println("-----Your Books-----");
             System.out.println("Your checked out books are:");
             for (Book book : updatedBooks) {
                 System.out.println("- " + book.getTitle() +  "(Book ID: " + book.getBookID() + ")");
             }
+        } else {
+            System.out.println("You have no books checked out.");
         }
     }
-    public static void checkoutBooks() {
-        Scanner scan = new Scanner(System.in);
+    public static void checkoutBooks(Scanner scan) {
         System.out.println("-----Checkout Books-----");
         System.out.println("Enter book ID to checkout: ");
 
@@ -132,7 +126,6 @@ public class UserSignIn {
     public static void viewBooks() // user ids able to view all books avalaible
     {
         List<Book> viewBooks = BookDB.getAllBooks();
-
         if (viewBooks.isEmpty()) {
             System.out.println("No Books Found!");
         } else {

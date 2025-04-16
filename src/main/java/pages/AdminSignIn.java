@@ -26,28 +26,22 @@ public class AdminSignIn {
             choice = scan.nextInt();
             switch (choice) {
                 case 1:
-                    System.out.println("View user info");
-                    viewUserInfo();
+                    viewUserInfo(scan);
                     break;
                 case 2:
-                    System.out.println("Checkout books for user");
-                    checkoutUserBooks();
+                    checkoutUserBooks(scan);
                     break;
                 case 3:
-                    System.out.println("View books available");
                     viewBooks();
                     break;
                 case 4:
-                    System.out.println("Search books");
                     searchBooks(scan); // search books method called
                     break;
                 case 5:
-                    System.out.println("Return books for user");
-                    returnUserBooks();
+                    returnUserBooks(scan);
                     break;
                 case 6:
-                    System.out.println("Remove users");
-                    removeUsers();
+                    removeUsers(scan);
                 case 7:
                     System.out.println("Logging out...");
                     break;
@@ -61,7 +55,7 @@ public class AdminSignIn {
             System.out.println("-----Admin Sign In-----");
 
             while (true) {
-                System.out.println("Enter Username: ");
+                System.out.println("Enter Admin Username: ");
                 String username = scan.nextLine().trim();
                 System.out.println("Enter Password: ");
                 String password = scan.nextLine().trim();
@@ -88,10 +82,7 @@ public class AdminSignIn {
         System.out.println("Enter your choice: ");
     }
 
-    public static void viewUserInfo(){
-
-        Scanner scan = new Scanner(System.in);
-
+    public static void viewUserInfo(Scanner scan){
         List<String> usernames = UserDB.getAllUsernames();
         if (usernames.isEmpty()) {
             System.out.println("No users to remove.");
@@ -104,6 +95,7 @@ public class AdminSignIn {
         }
 
         System.out.println("Enter Username to view info: ");
+        scan.nextLine();
         String username = scan.nextLine();
 
         User userToView = UserDB.getUserByUsername(username);
@@ -128,9 +120,9 @@ public class AdminSignIn {
     }
 
 
-    public static void checkoutUserBooks() {
-        Scanner scan = new Scanner(System.in);
+    public static void checkoutUserBooks(Scanner scan) {
         System.out.println("Enter a username to search or press Enter to go back:");
+        scan.nextLine();
         String input = scan.nextLine().trim();
 
         if (input.isEmpty()) {
@@ -172,30 +164,30 @@ public class AdminSignIn {
         scan.nextLine();
     }
 
-    public static void viewBooks(){
-            UserSignIn.viewBooks();
+    public static void viewBooks(){{
+        UserSignIn.viewBooks();}
     }
 
     public static void searchBooks(Scanner scan){
-        UserSignIn.searchBooks(scan);
+       UserSignIn.searchBooks(scan);
     }
 
 
-    public static void returnUserBooks(){
-        Scanner scan = new Scanner(System.in);
+    public static void returnUserBooks(Scanner scan){
         System.out.println("Enter Username to view info: ");
 
+        scan.nextLine();
         String username = scan.nextLine();
         User userToView = UserDB.getUserByUsername(username);
 
         List<Book> checkedOut = userToView.getBooks();
 
         if (checkedOut.isEmpty()) {
-            System.out.println("You have no books checked out.");
+            System.out.println("Books checked out: none.");
             return;
         }
 
-        System.out.println("Your checked out books are:");
+        System.out.println("Checked out books:");
         for (Book book : checkedOut) {
             System.out.println("----------------");
             System.out.println(book);
@@ -231,9 +223,7 @@ public class AdminSignIn {
     }
 
 
-    public static void removeUsers() {
-        Scanner scan = new Scanner(System.in);
-
+    public static void removeUsers(Scanner scan) {
         //create list of all users
         List<String> usernames = UserDB.getAllUsernames();
         if (usernames.isEmpty()) {
@@ -247,6 +237,7 @@ public class AdminSignIn {
         }
 
         System.out.println("\nEnter the username to remove or press Enter to go back:");
+        scan.nextLine();
         String input = scan.nextLine().trim();
 
         if (input.isEmpty()) {
