@@ -83,11 +83,11 @@ public class UserSignIn {
         System.out.println("Enter your choice: ");
     }
     public static void viewCheckedOutBooks() {
-        List<Book> updatedBooks = UserDB.getUserBooks(currentUser.getUserID());
-        if (!updatedBooks.isEmpty()) {
+        List<Book> checkedOut = UserDB.getUserBooks(currentUser.getUserID());
+        if (!checkedOut.isEmpty()) {
             System.out.println("-----Your Books-----");
             System.out.println("Your checked out books are:");
-            for (Book book : updatedBooks) {
+            for (Book book : checkedOut) {
                 System.out.println("- " + book.getTitle() +  "(Book ID: " + book.getBookID() + ")");
             }
         } else {
@@ -103,6 +103,8 @@ public class UserSignIn {
             scan.nextLine();
         }
         int bookID = scan.nextInt();
+        scan.nextLine();
+
         Book book = BookDB.getBookByID(bookID);
 
         if (book == null) {
@@ -155,15 +157,15 @@ public static void searchBooks(Scanner scan) // Here the user is able to check i
     }
 }
 public static void returnBooks(Scanner scan) {
-    List<Book> updatedBooks = UserDB.getUserBooks(currentUser.getUserID());
+    List<Book> checkedOut = UserDB.getUserBooks(currentUser.getUserID());
 
-    if (updatedBooks.isEmpty()) {
-        System.out.println("You have no books checked out.");
+    if (checkedOut.isEmpty()) {
+        System.out.println("Books checked out: none.");
         return;
     }
 
-    System.out.println("Your checked out books are:");
-    for (Book book : updatedBooks) {
+    System.out.println("Checked out books:");
+    for (Book book : checkedOut) {
         System.out.println("----------------");
         System.out.println(book);
     }
@@ -173,11 +175,11 @@ public static void returnBooks(Scanner scan) {
         System.out.println("Please enter a valid ID: ");
         scan.nextLine();
     }
-
     int bookID = scan.nextInt();
+    scan.nextLine();
     // Find the book with the entered ID
     Book bookToReturn = null;
-    for (Book book : updatedBooks) {
+    for (Book book : checkedOut) {
         if (book.getBookID() == bookID) {
             bookToReturn = book;
             break;

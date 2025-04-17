@@ -37,9 +37,10 @@ public class Main {
                 break;
             case 3:
                 CreateAccount.main(userInput);
-                break;
+                pop: UserSignIn.main();
             case 4:
                 CreateAdminAccount.main(userInput);
+                pop: AdminSignIn.main();
                 break;
             case 5:
                 break;

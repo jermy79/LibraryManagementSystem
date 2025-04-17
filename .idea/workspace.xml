@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b545db6c-1605-4c43-a4a1-997cdc5e909b" name="Changes" comment="simplified viewBooks and searchBooks">
+    <list default="true" id="b545db6c-1605-4c43-a4a1-997cdc5e909b" name="Changes" comment="removed extra scanners and strings">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/db_api/BookDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/db_api/BookDB.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pages/AdminSignIn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/AdminSignIn.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pages/UserSignIn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/UserSignIn.java" afterDir="false" />
     </list>
@@ -156,7 +158,9 @@
       <workItem from="1744676728036" duration="2712000" />
       <workItem from="1744732682991" duration="2410000" />
       <workItem from="1744737473713" duration="587000" />
-      <workItem from="1744768329949" duration="16188000" />
+      <workItem from="1744768329949" duration="16455000" />
+      <workItem from="1744849845706" duration="1000" />
+      <workItem from="1744852192186" duration="7682000" />
     </task>
     <task id="LOCAL-00001" summary="Added functions to interact with book database aswell as a class with examples of how to use them">
       <option name="closed" value="true" />
@@ -262,7 +266,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744788022135</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="removed extra scanners and strings">
+      <option name="closed" value="true" />
+      <created>1744793502835</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1744793502836</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -291,7 +303,8 @@
     <MESSAGE value="fixed menu loop and added viewUserInfo" />
     <MESSAGE value="improved checkoutBooks with updatedBooks" />
     <MESSAGE value="simplified viewBooks and searchBooks" />
-    <option name="LAST_COMMIT_MESSAGE" value="simplified viewBooks and searchBooks" />
+    <MESSAGE value="removed extra scanners and strings" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed extra scanners and strings" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

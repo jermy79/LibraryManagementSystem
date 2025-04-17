@@ -164,14 +164,9 @@ public class AdminSignIn {
         scan.nextLine();
     }
 
-    public static void viewBooks(){{
-        UserSignIn.viewBooks();}
-    }
+    public static void viewBooks(){UserSignIn.viewBooks();}
 
-    public static void searchBooks(Scanner scan){
-       UserSignIn.searchBooks(scan);
-    }
-
+    public static void searchBooks(Scanner scan){UserSignIn.searchBooks(scan);}
 
     public static void returnUserBooks(Scanner scan){
         System.out.println("Enter Username to view info: ");
