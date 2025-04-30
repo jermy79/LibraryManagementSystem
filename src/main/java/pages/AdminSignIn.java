@@ -144,12 +144,23 @@ public class AdminSignIn {
             System.out.println("ID: " + book.getBookID() + " | Title: " + book.getTitle());
         }
         System.out.println("\nEnter the Book ID to checkout or press Enter to cancel:");
-        String idInput = scan.nextLine().trim();
+        String idInput = scan.nextLine();
         if (idInput.isEmpty()) {
             return;
         }
         try {
             int bookID = Integer.parseInt(idInput);
+
+            Book book = BookDB.getBookByID(bookID);
+
+            if (book == null) {
+                System.out.println("Book not found");
+                return;
+            }
+            if (book.isCheckedOut()) {
+                System.out.println("Book is currently checked out");
+                return;
+            }
             boolean success = UserDB.checkoutBook(user.getUserID(), bookID);
 
             if (success) {

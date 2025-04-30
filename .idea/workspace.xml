@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b545db6c-1605-4c43-a4a1-997cdc5e909b" name="Changes" comment="removed extra scanners and strings">
+    <list default="true" id="b545db6c-1605-4c43-a4a1-997cdc5e909b" name="Changes" comment="added pop to main after createAccount methods">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db_api/BookDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/db_api/BookDB.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pages/AdminSignIn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/AdminSignIn.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pages/UserSignIn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/UserSignIn.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,7 +158,10 @@
       <workItem from="1744737473713" duration="587000" />
       <workItem from="1744768329949" duration="16455000" />
       <workItem from="1744849845706" duration="1000" />
-      <workItem from="1744852192186" duration="7682000" />
+      <workItem from="1744852192186" duration="8043000" />
+      <workItem from="1745207917269" duration="38000" />
+      <workItem from="1745803306659" duration="1420000" />
+      <workItem from="1745957499297" duration="7017000" />
     </task>
     <task id="LOCAL-00001" summary="Added functions to interact with book database aswell as a class with examples of how to use them">
       <option name="closed" value="true" />
@@ -274,7 +275,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744793502836</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="added pop to main after createAccount methods">
+      <option name="closed" value="true" />
+      <created>1744860199029</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1744860199029</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -304,7 +313,8 @@
     <MESSAGE value="improved checkoutBooks with updatedBooks" />
     <MESSAGE value="simplified viewBooks and searchBooks" />
     <MESSAGE value="removed extra scanners and strings" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed extra scanners and strings" />
+    <MESSAGE value="added pop to main after createAccount methods" />
+    <option name="LAST_COMMIT_MESSAGE" value="added pop to main after createAccount methods" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

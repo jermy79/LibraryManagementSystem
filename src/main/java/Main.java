@@ -38,6 +38,7 @@ public class Main {
             case 3:
                 CreateAccount.main(userInput);
                 pop: UserSignIn.main();
+                break;
             case 4:
                 CreateAdminAccount.main(userInput);
                 pop: AdminSignIn.main();
